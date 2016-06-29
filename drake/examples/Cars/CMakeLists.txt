@@ -13,10 +13,8 @@ if(LCM_FOUND)
     curve2.h
     car_simulation.h
     simple_car.h
-    trajectory_car.h
-    gen/driving_command.h
-    gen/euler_floating_joint_state.h
-    gen/simple_car_state.h)
+    trajectory_car.h)
+  add_subdirectory(gen)
   pods_install_pkg_config_file(drake-cars
     LIBS -ldrakeCars
     REQUIRES
@@ -30,11 +28,11 @@ if(LCM_FOUND)
   add_dependencies(car_sim_lcm drake_lcmtypes lcmtype_agg_hpp)
   target_link_libraries(car_sim_lcm drakeCars drakeRBSystem drakeLCMSystem)
 
-  if(roscpp_FOUND)
-    add_executable(car_sim_lcm_and_ros car_sim_lcm_and_ros.cc)
-    # add_dependencies(carSimLCMandROS ${PROJECT_NAME}_generate_messages)
-    target_link_libraries(car_sim_lcm_and_ros drakeCars drakeRBM drakeRBSystem drakeLCMSystem ${roscpp_LIBRARIES} ${tf_LIBRARIES})
-  endif()
+  #if(roscpp_FOUND)
+  #  add_executable(car_sim_lcm_and_ros car_sim_lcm_and_ros.cc)
+  #  # add_dependencies(carSimLCMandROS ${PROJECT_NAME}_generate_messages)
+  #  target_link_libraries(car_sim_lcm_and_ros drakeCars drakeRBM drakeRBSystem drakeLCMSystem ${roscpp_LIBRARIES} ${tf_LIBRARIES})
+  #endif()
 
   add_executable(multi_car_sim_lcm multi_car_sim_lcm.cc)
   add_dependencies(multi_car_sim_lcm drake_lcmtypes lcmtype_agg_hpp)
